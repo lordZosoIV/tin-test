@@ -31,7 +31,7 @@ contract Presale is Ownable {
     }
 
     function transferToWallet() external onlyOwner {
-        token.transfer(wallet, token.balanceOf(address(this)));
+        payable(owner()).transfer(address(this).balance);
     }
 
     function setRate(uint256 newRate) external onlyOwner {

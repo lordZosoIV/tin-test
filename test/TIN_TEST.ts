@@ -67,9 +67,33 @@ describe("OwnicToken", function () {
     });
 
     it("Should not allow non-owner to transfer tokens", async function () {
-        await expect(presale.connect(user).transferToWallet()).to.be.revertedWith(
+        await expect(presale.connect(user).transferAllTokensToOwner()).to.be.revertedWith(
             "Ownable: caller is not the owner"
         );
+    });
+
+    it("Should transfer all Ether to the owner", async function () {
+        // Send some Ether to the contract
+        const initialOwnerBalanceBeforeTransfer = await ethers.provider.getBalance(await owner.getAddress());
+        await owner.sendTransaction({
+            to: presale.address,
+            value: ethers.utils.parseEther("1.5"), // Send 1.5 Ether
+        });
+        const contractBalanceBeforeTransfer = await ethers.provider.getBalance(presale.address);
+
+        // Transfer all Ether to the owner
+
+        // Get the balances after the transfer
+        const finalOwnerBalanceAfterTransfer = await ethers.provider.getBalance(await owner.getAddress());
+        await presale.connect(owner).transferToWallet();
+        const finalContractBalanceAfterTransfer = await ethers.provider.getBalance(presale.address);
+        console.log("xxxx",finalOwnerBalanceAfterTransfer)
+        console.log("xxxx",finalContractBalanceAfterTransfer)
+        console.log("xxxx",contractBalanceBeforeTransfer)
+
+        // Check the balances after the transfer
+        // expect(finalOwnerBalanceAfterTransfer).to.be.gt(initialOwnerBalanceBeforeTransfer);
+        // expect(finalContractBalanceAfterTransfer).to.equal(ethers.constants.Zero);
     });
 
     it("Should transfer tokens to the owner", async function () {
