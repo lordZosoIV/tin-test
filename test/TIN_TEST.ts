@@ -67,7 +67,7 @@ describe("OwnicToken", function () {
     });
 
     it("Should not allow non-owner to transfer tokens", async function () {
-        await expect(presale.connect(user).transferTokensToWallet()).to.be.revertedWith(
+        await expect(presale.connect(user).transferToWallet()).to.be.revertedWith(
             "Ownable: caller is not the owner"
         );
     });
@@ -76,8 +76,29 @@ describe("OwnicToken", function () {
         const initialOwnerBalance = await tinToken.balanceOf(await owner.getAddress());
         const presaleBalance = await tinToken.balanceOf(presale.address);
 
-        await presale.transferTokensToWallet();
+        await presale.transferToWallet();
 
+        const finalOwnerBalance = await tinToken.balanceOf(await owner.getAddress());
+        const finalPresaleBalance = await tinToken.balanceOf(presale.address);
+
+        // Check the balances after the transfer
+        expect(finalOwnerBalance).to.equal(initialOwnerBalance.add(presaleBalance));
+        expect(finalPresaleBalance).to.equal(ethers.constants.Zero);
+    });
+
+
+    it("Should transfer all tokens to the owner", async function () {
+        // Transfer some tokens to the presale contract
+        await tinToken.connect(owner).transfer(presale.address, ethers.utils.parseEther("500"));
+
+        // Get the balances before the transfer
+        const initialOwnerBalance = await tinToken.balanceOf(await owner.getAddress());
+        const presaleBalance = await tinToken.balanceOf(presale.address);
+
+        // Transfer all tokens to the owner
+        await presale.connect(owner).transferAllTokensToOwner();
+
+        // Get the balances after the transfer
         const finalOwnerBalance = await tinToken.balanceOf(await owner.getAddress());
         const finalPresaleBalance = await tinToken.balanceOf(presale.address);
 

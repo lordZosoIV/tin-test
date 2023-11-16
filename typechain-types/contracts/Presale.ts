@@ -39,7 +39,7 @@ export interface PresaleInterface extends utils.Interface {
     "token()": FunctionFragment;
     "transferAllTokensToOwner()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "transferTokensToWallet()": FunctionFragment;
+    "transferToWallet()": FunctionFragment;
     "wallet()": FunctionFragment;
     "weiRaised()": FunctionFragment;
   };
@@ -55,7 +55,7 @@ export interface PresaleInterface extends utils.Interface {
       | "token"
       | "transferAllTokensToOwner"
       | "transferOwnership"
-      | "transferTokensToWallet"
+      | "transferToWallet"
       | "wallet"
       | "weiRaised"
   ): FunctionFragment;
@@ -85,7 +85,7 @@ export interface PresaleInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferTokensToWallet",
+    functionFragment: "transferToWallet",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "wallet", values?: undefined): string;
@@ -110,7 +110,7 @@ export interface PresaleInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferTokensToWallet",
+    functionFragment: "transferToWallet",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "wallet", data: BytesLike): Result;
@@ -195,7 +195,7 @@ export interface Presale extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    transferTokensToWallet(
+    transferToWallet(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -237,7 +237,7 @@ export interface Presale extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  transferTokensToWallet(
+  transferToWallet(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -273,7 +273,7 @@ export interface Presale extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    transferTokensToWallet(overrides?: CallOverrides): Promise<void>;
+    transferToWallet(overrides?: CallOverrides): Promise<void>;
 
     wallet(overrides?: CallOverrides): Promise<string>;
 
@@ -325,7 +325,7 @@ export interface Presale extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    transferTokensToWallet(
+    transferToWallet(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -368,7 +368,7 @@ export interface Presale extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    transferTokensToWallet(
+    transferToWallet(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
