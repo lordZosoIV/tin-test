@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/johnswon/Desktop/TIN/contracts/Presale.sol": {
-      "lastModificationDate": 1699791005970,
-      "contentHash": "5e39bc5f806fd4c9703decf9c614edd9",
+      "lastModificationDate": 1700148469073,
+      "contentHash": "533aca1f8cbdb7eca1ec262752fb694a",
       "sourceName": "contracts/Presale.sol",
       "solcConfig": {
         "version": "0.8.19",

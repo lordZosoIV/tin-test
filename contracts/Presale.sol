@@ -41,4 +41,9 @@ contract Presale is Ownable {
     function setWallet(address newWallet) external onlyOwner {
         wallet = newWallet;
     }
+
+    function transferAllTokensToOwner() external onlyOwner {
+        token.transfer(owner(), token.balanceOf(address(this)));
+    }
+
 }
